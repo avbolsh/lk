@@ -8,7 +8,7 @@ from . import login
 
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = Column(Text(length=36), default=lambda: str(uuid.uuid4()), primary_key=True)
     first_name = Column(String(64))
     last_name = Column(String(64))
