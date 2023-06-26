@@ -4,6 +4,8 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship, backref
 from flask_login import UserMixin
 import uuid
+from . import login
+
 
 
 class User(db.Model):
@@ -16,3 +18,8 @@ class User(db.Model):
     last_seen = Column(DateTime, default=datetime.utcnow)
     inn = Column(String(length=12))
     snils = Column(String(length=11))
+
+
+@login.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
