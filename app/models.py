@@ -19,6 +19,9 @@ class User(UserMixin, db.Model):
     inn = Column(String(length=12))
     snils = Column(String(length=11))
 
+    def verify_password(self, password):
+        return True
+
 
 @login.user_loader
 def load_user(user_id):

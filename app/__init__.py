@@ -1,6 +1,6 @@
 from flask import Flask
 from app.config import Config
-from .extension import db, migrate, login
+from .extension import db, migrate, login, bootstrap
 import app.models
 
 login.login_view = "auth.login"
@@ -14,6 +14,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    bootstrap.init_app(app)
 
     # Register blueprints here
     from .main import main as main_blueprint
